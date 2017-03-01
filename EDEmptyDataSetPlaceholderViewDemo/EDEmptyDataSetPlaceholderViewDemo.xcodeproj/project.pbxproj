@@ -14,8 +14,6 @@
 		08E0152E1E530204004DF28B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08E0152D1E530204004DF28B /* Assets.xcassets */; };
 		08E015311E530204004DF28B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08E0152F1E530204004DF28B /* LaunchScreen.storyboard */; };
 		08E0153B1E530217004DF28B /* EDEmptyDataSetPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E0153A1E530217004DF28B /* EDEmptyDataSetPlaceholderView.m */; };
-		08E015481E5305C9004DF28B /* EDEmptyDataSetPlaceholderView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E015411E5305C9004DF28B /* EDEmptyDataSetPlaceholderView.framework */; };
-		08E015491E5305C9004DF28B /* EDEmptyDataSetPlaceholderView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08E015411E5305C9004DF28B /* EDEmptyDataSetPlaceholderView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		08E0154E1E5305E0004DF28B /* EDEmptyDataSetPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E0153A1E530217004DF28B /* EDEmptyDataSetPlaceholderView.m */; };
 		08E0154F1E5305E5004DF28B /* EDEmptyDataSetPlaceholderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 08E015391E530217004DF28B /* EDEmptyDataSetPlaceholderView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -37,7 +35,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				08E015491E5305C9004DF28B /* EDEmptyDataSetPlaceholderView.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,7 +63,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08E015481E5305C9004DF28B /* EDEmptyDataSetPlaceholderView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +476,7 @@
 				08E0154C1E5305C9004DF28B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

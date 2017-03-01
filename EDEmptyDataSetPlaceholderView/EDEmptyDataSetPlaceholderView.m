@@ -114,13 +114,6 @@
     return self;
 }
 
-- (instancetype)init{
-    if (self = [super init]) {
-        [self _initialize];
-    }
-    return self;
-}
-
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         [self _initialize];
@@ -174,6 +167,7 @@
     }
     view.emptyDataSetPlaceholderViewOffset = offset;
     view.emptyDataSetPlaceholderViewContentHeight = contentHeight;
+    view.translatesAutoresizingMaskIntoConstraints = NO;
     
     [[self contentView] addSubview:view];
     [[self mutableItemViews] addObject:view];
@@ -266,6 +260,7 @@
     self.mutableItemViews = [NSMutableArray array];
     
     self.contentView = [UIView new];
+    self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:[self contentView]];
     
     self.contentInsets = UIEdgeInsetsMake(CGFLOAT_MAX, CGFLOAT_MAX, CGFLOAT_MAX, CGFLOAT_MAX);
@@ -306,8 +301,8 @@
 - (void)_updateItemViewslayout{
     
     NSArray *itemViews = [[self mutableItemViews] copy];
+    NSMutableArray *constraints = [NSMutableArray array];
     [itemViews enumerateObjectsUsingBlock:^(UIView *itemView, NSUInteger index, BOOL *stop) {
-        NSMutableArray *constraints = [NSMutableArray array];
         NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:itemView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0];
         [constraints addObject:constraint];
         constraint = [NSLayoutConstraint constraintWithItem:itemView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationLessThanOrEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0 constant:0];
@@ -328,18 +323,20 @@
             constraint = [NSLayoutConstraint constraintWithItem:itemView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
             [constraints addObject:constraint];
         }
+        
         if (itemView.emptyDataSetPlaceholderViewContentHeight > 0) {
             constraint = [NSLayoutConstraint constraintWithItem:itemView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:0 multiplier:1.0 constant:itemView.emptyDataSetPlaceholderViewContentHeight];
-            [constraints addObject:constraint];
+            [itemView addConstraint:constraint];
         }
-        [itemView removeConstraints:[[itemView constraints] copy]];
-        [itemView addConstraints:constraints];
     }];
+    
+    [[self contentView] removeConstraints:[[[self contentView] constraints] copy]];
+    [[self contentView] addConstraints:constraints];
 }
 
 - (void)_updateContentSize{
     UIView *DZNEmptyDataSetView = [self DZNEmptyDataSetView];
-    if (DZNEmptyDataSetView) {
+    if (DZNEmptyDataSetView && ![self translatesAutoresizingMaskIntoConstraints]) {
         CGSize size = [[self DZNEmptyDataSetView] bounds].size;
         NSMutableArray *constraints = [NSMutableArray array];
         NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:0 multiplier:1.0 constant:size.height];
